@@ -1,1 +1,2 @@
-# fastersave
+FASTERSAVEEBOT
+MANIKI
