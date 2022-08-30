@@ -516,46 +516,40 @@ def likee(message):
 import requests
 from bs4 import BeautifulSoup
 def insta(message):
+    try:
+        try:
+            BASE_URL = "https://instasave.website/#downloadhere/"
+            URL = message.text
+            s = requests.Session()
 
-	try:
-		try:
-			    BASE_URL = "https://instasave.website/#downloadhere/"
-			    URL = message.text
-			    s = requests.Session()
+            data = {"link":URL }
+            r = s.post(f'{BASE_URL}', data=data)
 
-			    data = {"link":URL }
-			    r = s.post(f'{BASE_URL}', data=data)
+            soup = BeautifulSoup(r.text, 'html.parser')
+            urls=[]
+            for a in soup.find_all('a', href=True):
 
-			    soup = BeautifulSoup(r.text, 'html.parser')
-			    urls=[]
-			    for a in soup.find_all('a', href=True):
-
-					    if a['href']=="https://pro.instasave.website/":
-						pass
-					    elif a['href'] == 'https://instasave.website':
-						pass            
-					    elif a['href'] == 'https://server.instasave.website/':
-						pass            
-					    elif a['href'] == 'https://en.wikipedia.org/wiki/Instagram':
-						pass
-					    else:
-						bot.send_document(message.chat.id,a['href'])
-						# bot.send_video(message.chat.id,a['href'])
-
-		except:
-					BASE_URL = "https://vidiget.com/instagram_downloader#"
-					URL =message.text
-					s = requests.Session()
-					data = {"insta_page":URL }
-					r = s.post(f'{BASE_URL}', data=data)
-					soup = BeautifulSoup(r.text, 'html.parser')
-					for link in soup.findAll('a', {'class': 'btn btn-sm btn-danger dl-btn'}):
-					    bot.send_document(message.chat.id,link['href'])
-
-
-	except:
-		pass
-
+                    if a['href']=="https://pro.instasave.website/":
+                        pass
+                    elif a['href'] == 'https://instasave.website':
+                        pass            
+                    elif a['href'] == 'https://server.instasave.website/':
+                        pass            
+                    elif a['href'] == 'https://en.wikipedia.org/wiki/Instagram':
+                        pass
+                    else:
+                        bot.send_document(message.chat.id,a['href'])
+        except:
+                    BASE_URL = "https://vidiget.com/instagram_downloader#"
+                    URL =message.text
+                    s = requests.Session()
+                    data = {"insta_page":URL }
+                    r = s.post(f'{BASE_URL}', data=data)
+                    soup = BeautifulSoup(r.text, 'html.parser')
+                    for link in soup.findAll('a', {'class': 'btn btn-sm btn-danger dl-btn'}):
+                        bot.send_document(message.chat.id,link['href'])
+    except:
+        pass
 
 
     resend(message)
