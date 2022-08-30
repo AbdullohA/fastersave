@@ -546,7 +546,25 @@ def insta(message):
         
 
 def tiktok(message):
-    pass
+   	import requests
+	import json
+
+
+	video_link = (message.text)
+	url = "https://tiktok-downloader-download-tiktok-videos-without-watermark.p.rapidapi.com/vid/index"
+	querystring = {"url":video_link}
+	headers = {
+	    "X-RapidAPI-Key": "9efcf11663mshb40c0e1c8869076p116fcbjsneacdd84f6dba",
+	    "X-RapidAPI-Host": "tiktok-downloader-download-tiktok-videos-without-watermark.p.rapidapi.com"
+	}
+	response = requests.request("GET", url, headers=headers, params=querystring)
+	ol = (response.text)
+	out = json.loads(ol)
+	# print(out)
+	videos = (out['video'][0])
+	audios = (out['music'][0])
+	bot.send_video(message.chat.id,videos)
+	bot.send_audio(message.chat.id,audios)
 def vimeo(message):
     URL = message.text
     BASE_URL = 'https://vidiget.com/vimeo_downloader'
@@ -572,7 +590,7 @@ def mainn(message):
         insta(message)
         
         
-    if message.text.startswith('httpss'): 
+    if message.text.startswith('https://tiktok') or message.text.startswith('http://tiktok') or message.text.startswith('http://www.tiktok') or message.text.startswith('https://www.tiktok') or  message.text.startswith('https://v') or message.text.startswith('http://v') or message.text.startswith('http://www.v') or message.text.startswith('https://www.v'):    
         print("TikTok",message.chat.id)
            
         tiktok(message)
