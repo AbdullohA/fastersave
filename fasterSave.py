@@ -8,6 +8,8 @@ import sqlite3
 import time
 import os
 from telebot import types
+import requests
+import json
 
 from telebot import apihelper
 
@@ -546,8 +548,6 @@ def insta(message):
         
 
 def tiktok(message):
-   	import requests
-	import json
 
 
 	video_link = (message.text)
